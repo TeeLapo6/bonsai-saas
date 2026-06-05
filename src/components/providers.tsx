@@ -4,7 +4,6 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { Suspense, useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
-
 // Initialize PostHog on module load (client-side only)
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {

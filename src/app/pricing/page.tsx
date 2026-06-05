@@ -58,7 +58,9 @@ export default function PricingPage() {
                             </ul>
                         </CardContent>
                         <CardFooter>
-                            <Button className="w-full bg-green-600 hover:bg-green-700">Start Free Trial</Button>
+                            <Button className="w-full bg-green-600 hover:bg-green-700" asChild>
+                                <Link href="/login">Start Free Trial</Link>
+                            </Button>
                         </CardFooter>
                     </Card>
 
