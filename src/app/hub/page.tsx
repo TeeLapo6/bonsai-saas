@@ -1,76 +1,77 @@
-'use client'
-
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ExternalLink, Package, Search, Download, Zap, Users, Terminal, Cpu, Shield, Layers, Target, Drama, Database } from 'lucide-react'
+import { HubBrowserMock } from '@/components/diagrams'
+import { ExternalLink, Package, Search, Download, Layers, Terminal, Cpu, Zap, Shield, Target, Database, Users } from 'lucide-react'
+
+const APP_URL = process.env.NEXT_PUBLIC_BONSAI_APP_URL || 'https://bonsai-app.taylorlaporte.engineer'
 
 export default function HubLandingPage() {
-    // Configure this to point to your Hub instance
-    const HUB_URL = process.env.NEXT_PUBLIC_HUB_URL || 'http://localhost:8000'
-
     const blockTypes = [
-        { icon: Terminal, name: 'System Prompts', count: 1, color: 'bg-violet-500' },
-        { icon: Cpu, name: 'Tools', count: 3, color: 'bg-orange-500' },
-        { icon: Zap, name: 'Workflows', count: 1, color: 'bg-cyan-500' },
-        { icon: Shield, name: 'Evaluators', count: 0, color: 'bg-purple-500' },
-        { icon: Users, name: 'Agents', count: 171, color: 'bg-green-500' },
-        { icon: Target, name: 'Skills', count: 1, color: 'bg-pink-500' },
-        { icon: Database, name: 'Datasets', count: 0, color: 'bg-lime-500' },
+        { icon: Terminal, name: 'System Prompts', desc: 'Reusable prompt templates with variable interpolation' },
+        { icon: Cpu, name: 'Tools', desc: 'Function wrappers and MCP-integrated tools' },
+        { icon: Zap, name: 'Workflows', desc: 'Declarative, versioned AI pipelines' },
+        { icon: Shield, name: 'Evaluators', desc: 'Quality scoring and multi-dimensional benchmarks' },
+        { icon: Users, name: 'Agents', desc: 'Pre-configured agents with tools, memory, and KBs' },
+        { icon: Target, name: 'Skills', desc: 'Behavioral injections that modify agent reasoning' },
+        { icon: Database, name: 'Datasets', desc: 'Evaluation and fine-tuning datasets' },
     ]
 
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Hero Section */}
             <section className="relative overflow-hidden bg-gradient-to-br from-green-900/20 via-background to-teal-900/20 py-20 lg:py-32">
                 <div className="container px-4 mx-auto text-center">
                     <Badge className="mb-6 bg-green-600/20 text-green-400 border-green-600/30">
                         Community Marketplace
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-                        The Agency Hub
+                        The Bonsai Hub
                     </h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-                        Discover, install, and share building blocks for your AI workflows.
-                        180+ curated blocks available for free, with one-click import.
+                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
+                        An App Store for AI components. Browse 180+ community building blocks —
+                        agents, tools, MCP servers, providers, chains, skills, and more.
+                    </p>
+                    <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-10">
+                        One-click install via <code className="bg-muted px-1.5 py-0.5 rounded text-primary">bonsai://</code> deep links. No account required to browse.
+                        All blocks execute locally on your machine.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white rounded-full px-8" asChild>
-                            <a href={HUB_URL} target="_blank" rel="noopener noreferrer">
+                            <a href={`${APP_URL}/hub`} target="_blank" rel="noopener noreferrer">
                                 <ExternalLink className="mr-2 h-5 w-5" />
                                 Browse the Hub
                             </a>
                         </Button>
-                        <Button size="lg" variant="outline" className="rounded-full px-8">
-                            <Package className="mr-2 h-5 w-5" />
-                            Submit a Block
+                        <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
+                            <a href={`${APP_URL}/hub`} target="_blank" rel="noopener noreferrer">
+                                <Package className="mr-2 h-5 w-5" />
+                                Submit a Block
+                            </a>
                         </Button>
                     </div>
                 </div>
             </section>
 
-            {/* Block Types Overview */}
-            <section className="py-16 lg:py-24 bg-muted/30">
+            {/* Block Types */}
+            <section className="py-16 lg:py-24">
                 <div className="container px-4 mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold mb-4">What's in the Hub?</h2>
                         <p className="text-muted-foreground max-w-xl mx-auto">
-                            A rich ecosystem of modular components to accelerate your AI development.
+                            Eight block types covering every aspect of AI development.
                         </p>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {blockTypes.map((type) => (
                             <Card key={type.name} className="text-center hover:border-primary/50 transition-colors">
                                 <CardHeader className="pb-2">
-                                    <div className={`w-12 h-12 rounded-xl ${type.color} mx-auto flex items-center justify-center text-white mb-3`}>
+                                    <div className="w-12 h-12 rounded-xl bg-primary/10 mx-auto flex items-center justify-center text-primary mb-3">
                                         <type.icon size={24} />
                                     </div>
                                     <CardTitle className="text-lg">{type.name}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="text-3xl font-bold text-primary">{type.count}</p>
-                                    <p className="text-xs text-muted-foreground">available</p>
+                                    <p className="text-xs text-muted-foreground">{type.desc}</p>
                                 </CardContent>
                             </Card>
                         ))}
@@ -78,36 +79,50 @@ export default function HubLandingPage() {
                 </div>
             </section>
 
-            {/* Features */}
-            <section className="py-16 lg:py-24">
+            {/* How it works */}
+            <section className="py-16 lg:py-24 bg-muted/30">
                 <div className="container px-4 mx-auto">
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <div className="p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
-                            <Search className="w-10 h-10 text-green-500 mb-4" />
-                            <h3 className="text-xl font-bold mb-2">Browse & Search</h3>
-                            <p className="text-muted-foreground">
-                                Filter by category, search by name, and find exactly what you need in seconds.
-                            </p>
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div className="space-y-8">
+                            <h2 className="text-3xl font-bold">How Hub blocks work</h2>
+                            <div className="space-y-6">
+                                {[
+                                    { icon: Search, title: 'Browse', desc: 'Filter by category, search by name, and find exactly what you need in seconds.' },
+                                    { icon: Download, title: 'Install', desc: 'Click "Install" — the bonsai:// protocol fires a deep link that imports the block into your local Bonsai instance.' },
+                                    { icon: Package, title: 'Use', desc: 'The block appears in your library. Select it in any conversation, chain, or workflow.' },
+                                    { icon: Layers, title: 'Publish', desc: 'Share your own blocks with the community. Version-managed manifest format. GPG-signed identity.' },
+                                ].map((step, i) => (
+                                    <div key={i} className="flex gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                                            <step.icon size={20} />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold">{step.title}</h3>
+                                            <p className="text-sm text-muted-foreground">{step.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
-                            <Download className="w-10 h-10 text-green-500 mb-4" />
-                            <h3 className="text-xl font-bold mb-2">One-Click Install</h3>
-                            <p className="text-muted-foreground">
-                                Use the <code className="bg-muted px-1 rounded">bonsai://</code> protocol to import blocks directly into your local instance.
-                            </p>
-                        </div>
-                        <div className="p-6 rounded-2xl border bg-card hover:shadow-lg transition-all">
-                            <Layers className="w-10 h-10 text-green-500 mb-4" />
-                            <h3 className="text-xl font-bold mb-2">Open & Extensible</h3>
-                            <p className="text-muted-foreground">
-                                All blocks are open source. Fork, modify, and contribute back to the community.
-                            </p>
-                        </div>
+                        <HubBrowserMock className="w-full min-h-[400px]" />
                     </div>
                 </div>
             </section>
 
-            {/* CTA */}
+            {/* Privacy */}
+            <section className="py-16 lg:py-24">
+                <div className="container px-4 mx-auto max-w-3xl text-center">
+                    <Shield className="w-12 h-12 text-primary mx-auto mb-6" />
+                    <h2 className="text-2xl font-bold mb-4">Privacy-First Marketplace</h2>
+                    <p className="text-muted-foreground leading-relaxed">
+                        No account is required to browse, search, or import blocks. All deep-links
+                        execute locally in your Bonsai instance. Blocks are open YAML manifests —
+                        inspect the code before you install. Unlike other platform hubs, we don't
+                        require an email address to consume blocks. Your AI usage is your business.
+                    </p>
+                </div>
+            </section>
+
             <section className="py-16 lg:py-24 bg-green-600 text-white">
                 <div className="container px-4 mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to explore?</h2>
@@ -115,7 +130,7 @@ export default function HubLandingPage() {
                         The Hub is completely free and open. No account required to browse or install blocks.
                     </p>
                     <Button size="lg" className="bg-white text-green-600 hover:bg-green-50 rounded-full px-10" asChild>
-                        <a href={HUB_URL} target="_blank" rel="noopener noreferrer">
+                        <a href={`${APP_URL}/hub`} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="mr-2 h-5 w-5" />
                             Open the Hub
                         </a>
