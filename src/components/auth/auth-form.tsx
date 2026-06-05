@@ -6,17 +6,36 @@ import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Loader2, Mail, Lock, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { Loader2, Mail, Lock, AlertCircle, CheckCircle2, Chrome, Github } from 'lucide-react';
 
 export default function AuthForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [oauthLoading, setOauthLoading] = useState<'google' | 'github' | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [view, setView] = useState<'signin' | 'signup'>('signin');
 
     const router = useRouter();
+
+    const handleOAuth = async (provider: 'google' | 'github') => {
+        setOauthLoading(provider);
+        setError(null);
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider,
+                options: {
+                    redirectTo: `${window.location.origin}/auth/callback`,
+                },
+            });
+            if (error) throw error;
+        } catch (err: any) {
+            setError(err.message);
+            setOauthLoading(null);
+        }
+    };
 
     const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -57,11 +76,48 @@ export default function AuthForm() {
                 <CardTitle>{view === 'signin' ? 'Welcome Back' : 'Create Account'}</CardTitle>
                 <CardDescription>
                     {view === 'signin'
-                        ? 'Enter your credentials to access your dashboard'
+                        ? 'Enter your credentials or continue with a provider'
                         : 'Sign up to start publishing blocks to the Hub'}
                 </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
+                {/* OAuth Buttons */}
+                <div className="space-y-2">
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => handleOAuth('google')}
+                        disabled={!!oauthLoading}
+                    >
+                        {oauthLoading === 'google' ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                            <Chrome className="mr-2 h-4 w-4" />
+                        )}
+                        Continue with Google
+                    </Button>
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => handleOAuth('github')}
+                        disabled={!!oauthLoading}
+                    >
+                        {oauthLoading === 'github' ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                            <Github className="mr-2 h-4 w-4" />
+                        )}
+                        Continue with GitHub
+                    </Button>
+                </div>
+
+                <div className="relative">
+                    <Separator />
+                    <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs text-muted-foreground">
+                        or continue with email
+                    </span>
+                </div>
+
                 <form onSubmit={handleAuth} className="space-y-4">
                     <div className="space-y-2">
                         <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
