@@ -7,6 +7,7 @@ import { Menu, X, Sparkles, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
 
 const APP_URL = process.env.NEXT_PUBLIC_BONSAI_APP_URL || 'https://bonsai-app.taylorlaporte.engineer'
+const HUB_URL = process.env.NEXT_PUBLIC_BONSAI_HUB_URL || 'https://hub.bonsai-app.taylorlaporte.engineer'
 
 export function SiteHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -29,7 +30,7 @@ export function SiteHeader() {
                 <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
                     <Link href="/features" className="text-muted-foreground hover:text-foreground transition-colors">Features</Link>
                     <Link href="/compare" className="text-muted-foreground hover:text-foreground transition-colors">Compare</Link>
-                    <Link href="/hub" className="text-muted-foreground hover:text-foreground transition-colors">Hub</Link>
+                    <a href={HUB_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Hub</a>
                     <Link href="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link>
                     <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
                     <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">Docs</Link>
@@ -58,7 +59,7 @@ export function SiteHeader() {
                     <nav className="flex flex-col space-y-4 font-medium">
                         <Link href="/features" onClick={() => setIsMobileMenuOpen(false)}>Features</Link>
                         <Link href="/compare" onClick={() => setIsMobileMenuOpen(false)}>Compare</Link>
-                        <Link href="/hub" onClick={() => setIsMobileMenuOpen(false)}>Hub</Link>
+                        <a href={HUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>Hub</a>
                         <Link href="/enterprise" onClick={() => setIsMobileMenuOpen(false)}>Enterprise</Link>
                         <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                         <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>

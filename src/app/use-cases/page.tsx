@@ -16,6 +16,8 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
+const HUB_URL = process.env.NEXT_PUBLIC_BONSAI_HUB_URL || 'https://hub.bonsai-app.taylorlaporte.engineer'
+
 export default function UseCasesPage() {
     const cases = [
         {
@@ -157,7 +159,7 @@ export default function UseCasesPage() {
                         Schedule a Call
                     </Button>
                     <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 rounded-full px-8" asChild>
-                        <Link href="/hub">Browse Hub Blocks</Link>
+                        <a href={HUB_URL} target="_blank" rel="noopener noreferrer">Browse Hub Blocks</a>
                     </Button>
                 </div>
             </div>

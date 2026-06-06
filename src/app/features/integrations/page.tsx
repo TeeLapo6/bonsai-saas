@@ -8,6 +8,8 @@ import {
     Box, Terminal, Plug, Globe, ShoppingBag, Cpu, Eye
 } from 'lucide-react'
 
+const HUB_URL = process.env.NEXT_PUBLIC_BONSAI_HUB_URL || 'https://hub.bonsai-app.taylorlaporte.engineer'
+
 export default function IntegrationsPage() {
     return (
         <div className="flex flex-col min-h-screen">
@@ -186,7 +188,7 @@ export default function IntegrationsPage() {
                             <Link href="/docs">Get Started <ArrowRight className="ml-2 h-5 w-5" /></Link>
                         </Button>
                         <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 rounded-full px-8" asChild>
-                            <Link href="/hub">Browse Hub <ExternalLink className="ml-2 h-5 w-5" /></Link>
+                            <a href={HUB_URL} target="_blank" rel="noopener noreferrer">Browse Hub <ExternalLink className="ml-2 h-5 w-5" /></a>
                         </Button>
                     </div>
                 </div>
