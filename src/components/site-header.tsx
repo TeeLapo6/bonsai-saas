@@ -26,7 +26,7 @@ export function SiteHeader() {
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
                     <Link href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</Link>
-                    <Link href="/hub" className="text-muted-foreground hover:text-foreground transition-colors">Hub</Link>
+                    <Link href="https://hub.bonsai-app.taylorlaporte.engineer" className="text-muted-foreground hover:text-foreground transition-colors" target="_blank">Hub</Link>
                     <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
                     <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">Docs</Link>
                     <Link href="/use-cases" className="text-muted-foreground hover:text-foreground transition-colors">Use Cases</Link>
@@ -52,7 +52,7 @@ export function SiteHeader() {
                 <div className="md:hidden border-t bg-background px-4 py-6 space-y-4 animate-in slide-in-from-top duration-200">
                     <nav className="flex flex-col space-y-4 font-medium">
                         <Link href="/#features" onClick={() => setIsMobileMenuOpen(false)}>Features</Link>
-                        <Link href="/hub" onClick={() => setIsMobileMenuOpen(false)}>Hub</Link>
+                        <Link href="https://hub.bonsai-app.taylorlaporte.engineer" onClick={() => setIsMobileMenuOpen(false)} target="_blank">Hub</Link>
                         <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                         <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>
                         <Link href="/use-cases" onClick={() => setIsMobileMenuOpen(false)}>Use Cases</Link>
