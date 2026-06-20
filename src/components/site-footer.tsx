@@ -2,8 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Github, Twitter } from 'lucide-react'
 
-const HUB_URL = process.env.NEXT_PUBLIC_BONSAI_HUB_URL || 'https://hub.bonsai-app.taylorlaporte.engineer'
-
 export function SiteFooter() {
     return (
         <footer className="bg-background border-t py-12 lg:py-16">
@@ -37,7 +35,7 @@ export function SiteFooter() {
                     <h4 className="text-sm font-semibold uppercase tracking-wider">Product</h4>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                         <li><Link href="/#features" className="hover:text-foreground transition-colors">Features</Link></li>
-                        <li><a href={HUB_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Hub</a></li>
+                        <li><Link href="https://hub.bonsai-app.taylorlaporte.engineer" className="hover:text-foreground transition-colors" target="_blank">Hub</Link></li>
                         <li><Link href="/pricing" className="hover:text-foreground transition-colors">Pricing</Link></li>
                         <li><Link href="/docs" className="hover:text-foreground transition-colors">API</Link></li>
                     </ul>
@@ -46,7 +44,7 @@ export function SiteFooter() {
                 <div className="space-y-4">
                     <h4 className="text-sm font-semibold uppercase tracking-wider">Community</h4>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                        <li><a href={HUB_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Marketplace</a></li>
+                        <li><Link href="https://hub.bonsai-app.taylorlaporte.engineer" className="hover:text-foreground transition-colors" target="_blank">Marketplace</Link></li>
                         <li><Link href="#" className="hover:text-foreground transition-colors">Discord</Link></li>
                         <li><Link href="#" className="hover:text-foreground transition-colors">Contribute</Link></li>
                         <li><Link href="#" className="hover:text-foreground transition-colors">Showcase</Link></li>

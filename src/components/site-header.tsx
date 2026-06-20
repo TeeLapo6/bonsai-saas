@@ -3,11 +3,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Menu, X, Sparkles, ExternalLink } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
-
-const APP_URL = process.env.NEXT_PUBLIC_BONSAI_APP_URL || 'https://bonsai-app.taylorlaporte.engineer'
-const HUB_URL = process.env.NEXT_PUBLIC_BONSAI_HUB_URL || 'https://hub.bonsai-app.taylorlaporte.engineer'
 
 export function SiteHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -28,22 +25,19 @@ export function SiteHeader() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <Link href="/features" className="text-muted-foreground hover:text-foreground transition-colors">Features</Link>
-                    <Link href="/compare" className="text-muted-foreground hover:text-foreground transition-colors">Compare</Link>
-                    <a href={HUB_URL} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Hub</a>
-                    <Link href="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link>
+                    <Link href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</Link>
+                    <Link href="https://hub.bonsai-app.taylorlaporte.engineer" className="text-muted-foreground hover:text-foreground transition-colors" target="_blank">Hub</Link>
                     <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
                     <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">Docs</Link>
+                    <Link href="/use-cases" className="text-muted-foreground hover:text-foreground transition-colors">Use Cases</Link>
                 </nav>
 
                 <div className="hidden md:flex items-center space-x-4">
                     <Button variant="ghost" size="sm" asChild>
-                        <a href={APP_URL} target="_blank" rel="noopener noreferrer">Sign In</a>
+                        <Link href="/login">Login</Link>
                     </Button>
-                    <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white rounded-full" asChild>
-                        <a href={APP_URL} target="_blank" rel="noopener noreferrer">
-                            Get Started <Sparkles className="ml-1 h-3.5 w-3.5" />
-                        </a>
+                    <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white rounded-full">
+                        Download
                     </Button>
                 </div>
 
@@ -57,20 +51,17 @@ export function SiteHeader() {
             {isMobileMenuOpen && (
                 <div className="md:hidden border-t bg-background px-4 py-6 space-y-4 animate-in slide-in-from-top duration-200">
                     <nav className="flex flex-col space-y-4 font-medium">
-                        <Link href="/features" onClick={() => setIsMobileMenuOpen(false)}>Features</Link>
-                        <Link href="/compare" onClick={() => setIsMobileMenuOpen(false)}>Compare</Link>
-                        <a href={HUB_URL} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>Hub</a>
-                        <Link href="/enterprise" onClick={() => setIsMobileMenuOpen(false)}>Enterprise</Link>
+                        <Link href="/#features" onClick={() => setIsMobileMenuOpen(false)}>Features</Link>
+                        <Link href="https://hub.bonsai-app.taylorlaporte.engineer" onClick={() => setIsMobileMenuOpen(false)} target="_blank">Hub</Link>
                         <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                         <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>
+                        <Link href="/use-cases" onClick={() => setIsMobileMenuOpen(false)}>Use Cases</Link>
                     </nav>
                     <div className="flex flex-col gap-2 pt-4 border-t">
                         <Button variant="outline" className="w-full" asChild>
-                            <a href={APP_URL} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>Sign In</a>
+                            <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
                         </Button>
-                        <Button className="w-full bg-green-600 text-white" asChild>
-                            <a href={APP_URL} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>Get Started</a>
-                        </Button>
+                        <Button className="w-full bg-green-600 text-white">Download</Button>
                     </div>
                 </div>
             )}
